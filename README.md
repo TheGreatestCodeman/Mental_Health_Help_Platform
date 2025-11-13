@@ -81,10 +81,10 @@ This platform connects users with counselors, enables anonymous discussions, man
 ---
 
 ## 🧑‍💻 Team Members / Contributors
-- [Your Name]
-- [Collaborator 1]
-- [Collaborator 2]
-- [Collaborator 3]
+- 
+- 
+- 
+- 
 
 ---
 
