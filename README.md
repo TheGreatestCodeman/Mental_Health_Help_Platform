@@ -54,8 +54,8 @@ This platform connects users with counselors, enables anonymous discussions, man
 
 | Component | Technology Used |
 |------------|-----------------|
-| **Frontend** | HTML, CSS, JavaScript (or React) |
-| **Backend** | PHP / Python Flask / Node.js |
+| **Frontend** | HTML |
+| **Backend** | PHP |
 | **Database** | MySQL |
 | **Analytics** | SQL Queries, Python (NumPy, Pandas, Matplotlib) |
 | **Version Control** | Git & GitHub |
@@ -81,7 +81,7 @@ This platform connects users with counselors, enables anonymous discussions, man
 ---
 
 ## 🧑‍💻 Team Members / Contributors
-- 
+- Md. Shafein Rahman
 - 
 - 
 
