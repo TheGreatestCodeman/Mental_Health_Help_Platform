@@ -24,6 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+REVOKE ALTER, DROP, TRUNCATE ON your_database.your_table FROM 'app_user'@'localhost';
 -- Table structure for table `analytics`
 --
 
