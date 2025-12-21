@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2025 at 05:24 PM
+-- Generation Time: Dec 21, 2025 at 05:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,6 +55,15 @@ CREATE TABLE `can_create` (
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `can_create`
+--
+
+INSERT INTO `can_create` (`user_id`, `post_id`) VALUES
+(9, 0),
+(9, 2),
+(9, 3);
 
 -- --------------------------------------------------------
 
@@ -141,6 +150,15 @@ CREATE TABLE `post` (
   `comments` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`post_id`, `sharable_link`, `post_from_past`, `comments`) VALUES
+(1, NULL, 'i hate myself', NULL),
+(2, NULL, 'yoa', NULL),
+(3, NULL, 'hi', 'jimmy: hi haff\n');
+
 -- --------------------------------------------------------
 
 --
@@ -187,7 +205,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `role`, `points_earned`, `badges`, `appointment_numbers`, `feedback_id`) VALUES
-(8, 'lolcow', 'lolcow@gmail.com', '$2y$12$DNydsNqnrvCYyuvvsptbW.gm4hKIXhFVCra07Lnal6HWe55zNtSyO', 'user', 0, NULL, NULL, NULL);
+(8, 'lolcow', 'lolcow@gmail.com', '$2y$12$DNydsNqnrvCYyuvvsptbW.gm4hKIXhFVCra07Lnal6HWe55zNtSyO', 'user', 0, NULL, NULL, NULL),
+(9, 'hafff', 'haff@ggma.com', '$2y$12$nRfZZczVKjb7y1182cFWSerATcmk2yb2DKNrY5NZJeYOuuYJr8uLO', 'user', 0, NULL, NULL, NULL),
+(10, 'jimmy', 'goodma@gm.col', '$2y$12$1r2J/tOJUOHUgGgJV8JvQu54PKfFl6vBK/5Wfo14o3QeytMTLUXIW', 'user', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -328,10 +348,16 @@ ALTER TABLE `will_receive`
 --
 
 --
+-- AUTO_INCREMENT for table `post`
+--
+ALTER TABLE `post`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
