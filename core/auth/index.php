@@ -80,7 +80,6 @@ $posts = $mysqli->query("
     <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a></p>
 <?php endif; ?>
 
-//event button
 <a href="events.php">
   <button>Create New Event</button>
 </a>
@@ -119,4 +118,5 @@ $posts = $mysqli->query("
 
 </body>
 </html>
+
 
