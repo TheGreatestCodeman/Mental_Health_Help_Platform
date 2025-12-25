@@ -80,6 +80,11 @@ $posts = $mysqli->query("
     <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a></p>
 <?php endif; ?>
 
+//event button
+<a href="events.php">
+  <button>Create New Event</button>
+</a>
+
 <h2>All Posts</h2>
 <?php if ($posts->num_rows > 0): ?>
     <?php while ($post = $posts->fetch_assoc()): ?>
@@ -114,3 +119,4 @@ $posts = $mysqli->query("
 
 </body>
 </html>
+
