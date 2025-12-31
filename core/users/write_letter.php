@@ -2,9 +2,8 @@
 include "database.php";
 session_start();
 
-// I will use the below code line to determine user id after connecting this page to login page.
-//$user_id = $_SESSION['user_id'];
-$user_id = 8;
+
+$user_id = $_SESSION['user_id']??8;
 
 $success = "";
 
@@ -85,4 +84,5 @@ if (isset($_POST['save_letter'])) {
 
 </body>
 </html>
+
 
