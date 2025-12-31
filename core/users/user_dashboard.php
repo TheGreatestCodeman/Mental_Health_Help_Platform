@@ -1,9 +1,9 @@
 <?php
 require_once('database.php');
 session_start();
-// I will use the below code line to determine user id after connecting this page to login page.
+
 $user_id = $_SESSION['user_id']??8;
-//$user_id = 8;
+
 
 $releasedQuery = "SELECT COUNT(*) AS total FROM future_letters 
                   WHERE user_id = $user_id AND is_released = 1";
@@ -94,3 +94,4 @@ $pending = mysqli_fetch_assoc($pendingResult)['total'];
 
 </body>
 </html>
+
