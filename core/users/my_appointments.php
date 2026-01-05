@@ -8,8 +8,8 @@ session_start();
 
 $user_id = $_SESSION['user_id']??8;
 
-require_once __DIR__ . "/../../config/database.php";
-//require_once("database.php");
+//require_once __DIR__ . "/../../config/database.php";
+require_once("database.php");
 
 $sql = "
     SELECT 
@@ -114,4 +114,5 @@ $result = $stmt->get_result();
 
 </body>
 </html>
+
 
