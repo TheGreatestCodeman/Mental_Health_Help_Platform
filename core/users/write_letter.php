@@ -1,6 +1,6 @@
 <?php
-//include "database.php";
-require_once(__DIR__ . "/../../config/database.php");
+include "database.php";
+//require_once(__DIR__ . "/../../config/database.php");
 session_start();
 
 
@@ -85,6 +85,7 @@ if (isset($_POST['save_letter'])) {
 
 </body>
 </html>
+
 
 
 
