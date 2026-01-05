@@ -52,8 +52,8 @@ $pending = mysqli_fetch_assoc($pendingResult)['total'];
 
         <div class="stat-card">
             <h2>⭐</h2>
-            <p>Wellness Points</p>
-            <span>120</span>
+            <p>Wellness 👇 Checking</p>
+            <a href="user_mood_checkin.php" >How's Your Mood Today</a>
         </div>
     </div>
 
@@ -96,6 +96,7 @@ $pending = mysqli_fetch_assoc($pendingResult)['total'];
 
 </body>
 </html>
+
 
 
 
