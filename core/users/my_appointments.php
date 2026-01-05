@@ -98,7 +98,7 @@ $result = $stmt->get_result();
     <?php while ($row = $result->fetch_assoc()): ?>
         <div class="card">
 
-            <img src="../../uploads/<?= htmlspecialchars($row['profile_pic']) ?>" alt="Counselor">
+            <img src="uploads/<?= htmlspecialchars($row['profile_pic']) ?>" alt="Counselor">
             <div class="info">
                 <h3><?= htmlspecialchars($row['counselor_name']) ?></h3>
                 <p>📆 <?= date("d M Y", strtotime($row['appointment_date'])) ?></p>
@@ -114,5 +114,6 @@ $result = $stmt->get_result();
 
 </body>
 </html>
+
 
 
