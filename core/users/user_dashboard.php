@@ -87,7 +87,7 @@ $pending = mysqli_fetch_assoc($pendingResult)['total'];
     <div class="actions">
         <a href="write_letter.php" class="btn">✍️ Write a New Letter</a>
         <a href="wellness_quiz.php" class="btn secondary">📜 Take Daily Wellness Quiz</a>
-        <a href="#" class="btn">👨‍👨‍👦‍👦 View Groups</a>
+        <a href="group.php" class="btn">👨‍👨‍👦‍👦 View Groups</a>
         <a href="appointment.php" class="btn secondary">📌 Book Appointments </a>
         
     </div>
@@ -96,5 +96,6 @@ $pending = mysqli_fetch_assoc($pendingResult)['total'];
 
 </body>
 </html>
+
 
 
