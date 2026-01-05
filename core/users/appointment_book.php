@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once(__DIR__ . "/../../config/database.php");
-//require_once("database.php");
+//require_once(__DIR__ . "/../../config/database.php");
+require_once("database.php");
 //if (!isset($_SESSION['user_id'])) {
    // header("Location: ../../login.php");
   //  exit;
@@ -36,4 +36,5 @@ $stmt->execute();
 
 header("Location: my_appointments.php");
 exit;
+
 
