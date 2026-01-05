@@ -1,7 +1,7 @@
 <?php
 session_start();
-$mysqli = require __DIR__ . "/../../database.php";
-//require_once("database.php");
+//$mysqli = require __DIR__ . "/../../database.php";
+require_once("database.php");
 //if (!isset($_SESSION['user_id'])) {
   //  header("Location: ../../login.php");
     //exit;
@@ -52,4 +52,5 @@ $result = $mysqli->query($query);
 
 </body>
 </html>
+
 
