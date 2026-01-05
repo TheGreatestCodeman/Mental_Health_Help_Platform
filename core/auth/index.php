@@ -87,8 +87,8 @@ $posts = $mysqli->query("
     <a href="events_list.php">
         <button>View Upcoming Events</button>
     </a>
-    <a href="group.php">
-        <button>Browse Groups</button>
+    <a href="user_dashboard.php">
+        <button>My Dashboard</button>
     </a>
 </div>
 
@@ -126,6 +126,7 @@ $posts = $mysqli->query("
 
 </body>
 </html>
+
 
 
 
