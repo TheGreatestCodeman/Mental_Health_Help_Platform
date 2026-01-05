@@ -80,9 +80,17 @@ $posts = $mysqli->query("
     <p><a href="login.php">Log in</a> or <a href="signup.html">sign up</a></p>
 <?php endif; ?>
 
-<a href="event.php">
-    <button>Create New Event</button>
-</a>
+<div style="margin: 20px 0;">
+    <a href="event.php">
+        <button>Create New Event</button>
+    </a>
+    <a href="events_list.php">
+        <button>View Upcoming Events</button>
+    </a>
+    <a href="group.php">
+        <button>Browse Groups</button>
+    </a>
+</div>
 
 <h2>All Posts</h2>
 <?php if ($posts->num_rows > 0): ?>
