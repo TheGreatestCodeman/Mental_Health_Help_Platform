@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup - Mental Health Help Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .signup-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+        }
+        .signup-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .signup-container > p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .form-group button:hover {
+            transform: translateY(-2px);
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .back-link {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <div class="back-link">
+        <a href="index.php">← Back to Home</a>
+    </div>
+    
+    <h1>🧠 Mental Health Platform</h1>
+    <p>Create your account</p>
+    
+    <div class="tabs">
+        <button class="tab-button active" onclick="showTab('user-tab')">👤 User</button>
+        <button class="tab-button" onclick="showTab('counselor-tab')">👨‍⚕️ Counselor</button>
+        <button class="tab-button" onclick="showTab('admin-tab')">🔑 Admin</button>
+    </div>
+    
+    <!-- USER SIGNUP -->
+    <div id="user-tab" class="tab-content active">
+        <div class="info-box">
+            Sign up as a user to access support services, book appointments, and connect with counselors.
+        </div>
+        <form action="process-signup.php" method="post" id="user-signup" novalidate>
+            <input type="hidden" name="signup_type" value="user">
+            <div class="form-group">
+                <label for="user-name">Full Name</label>
+                <input type="text" id="user-name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="user-email">Email</label>
+                <input type="email" id="user-email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="user-password">Password</label>
+                <input type="password" id="user-password" name="password" required placeholder="Enter a strong password">
+            </div>
+            <div class="form-group">
+                <label for="user-password_confirmation">Confirm Password</label>
+                <input type="password" id="user-password_confirmation" name="password_confirmation" required placeholder="Repeat your password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Sign Up as User</button>
+            </div>
+            <div class="login-link">
+                Already have an account? <a href="login_unified.php">Sign in here</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- COUNSELOR SIGNUP -->
+    <div id="counselor-tab" class="tab-content">
+        <div class="info-box">
+            Sign up as a counselor to provide support and manage client appointments.
+        </div>
+        <form action="process-counselor-signup.php" method="post" id="counselor-signup" novalidate>
+            <input type="hidden" name="signup_type" value="counselor">
+            <div class="form-group">
+                <label for="counselor-name">Full Name</label>
+                <input type="text" id="counselor-name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="counselor-email">Email</label>
+                <input type="email" id="counselor-email" name="email" required placeholder="Enter your professional email">
+            </div>
+            <div class="form-group">
+                <label for="counselor-phone">Phone Number</label>
+                <input type="tel" id="counselor-phone" name="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="counselor-qualifications">Qualifications</label>
+                <input type="text" id="counselor-qualifications" name="qualifications" required placeholder="e.g., Licensed Professional Counselor, M.A. in Counseling">
+            </div>
+            <div class="form-group">
+                <label for="counselor-bio">Bio</label>
+                <input type="text" id="counselor-bio" name="bio" placeholder="Brief description about yourself">
+            </div>
+            <div class="form-group">
+                <label for="counselor-password">Password</label>
+                <input type="password" id="counselor-password" name="password" required placeholder="Enter a strong password">
+            </div>
+            <div class="form-group">
+                <label for="counselor-password_confirmation">Confirm Password</label>
+                <input type="password" id="counselor-password_confirmation" name="password_confirmation" required placeholder="Repeat your password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Register as Counselor</button>
+            </div>
+            <div class="login-link">
+                Already registered? <a href="login_unified.php">Sign in here</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- ADMIN SIGNUP -->
+    <div id="admin-tab" class="tab-content">
+        <div class="info-box">
+            ⚠️ Admin accounts are created by administrators only. Contact your platform administrator for access.
+        </div>
+        <form action="process-signup.php" method="post" id="admin-signup" novalidate>
+            <input type="hidden" name="signup_type" value="admin">
+            <div class="form-group">
+                <label for="admin-name">Full Name</label>
+                <input type="text" id="admin-name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="admin-email">Email</label>
+                <input type="email" id="admin-email" name="email" required placeholder="Enter your admin email">
+            </div>
+            <div class="form-group">
+                <label for="admin-invite-code">Invite Code</label>
+                <input type="text" id="admin-invite-code" name="invite_code" required placeholder="Enter your admin invitation code">
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" name="password" required placeholder="Enter a strong password">
+            </div>
+            <div class="form-group">
+                <label for="admin-password_confirmation">Confirm Password</label>
+                <input type="password" id="admin-password_confirmation" name="password_confirmation" required placeholder="Repeat your password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Create Admin Account</button>
+            </div>
+            <div class="login-link">
+                Already have an account? <a href="login_unified.php">Sign in here</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function showTab(tabId) {
+    // Hide all tabs
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Show selected tab
+    document.getElementById(tabId).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
