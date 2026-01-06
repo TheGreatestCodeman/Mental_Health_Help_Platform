@@ -3,11 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2026 (Merged from mental.sql and 1mental.sql)
+-- Generation Time: Jan 06, 2026 at 02:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
--- 
--- MERGE NOTE: mental.sql has precedence. Unique tables from 1mental.sql included.
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,7 +73,8 @@ CREATE TABLE `can_create` (
 INSERT INTO `can_create` (`user_id`, `post_id`) VALUES
 (9, 1),
 (9, 2),
-(9, 3);
+(9, 3),
+(9, 5);
 
 -- --------------------------------------------------------
 
@@ -114,7 +113,8 @@ CREATE TABLE `counselor` (
 INSERT INTO `counselor` (`c_id`, `name`, `email`, `phone`, `bio`, `qualifications`, `profile_image`, `profile_pic`, `password`) VALUES
 (1, 'Tanvir Tonmoy', 'tanvir.rahman.tonmoy@g.bracu.ac.bd', '01864625239', '', 'who cares', NULL, NULL, '$2y$10$i6exarYjPAANFjWw1T3ID.PoQhT72.txIYqVwKxGjqrVPYPixe31m'),
 (2, 'i dont know', 'trtonmoy88@gmail.com', '01864625239', '', 'who cares', NULL, NULL, '$2y$10$pwY6z20h73VlZiFC.79qfOH.UpfxYIBa3xLKxmLCga/O3ywYSTwVC'),
-(4, 'Tanvir Rahman Tonmoy', 'trtonmoy11@gmail.com', '01864625239', 'i dont know', 'none of your business', NULL, '1767282514_495367505_1114526730719562_3796782046368959672_n.jpg', '$2y$10$AisXnWLtFn197/JAIeZIx./HWnMn3Vi0C5LxC6W542kolbV59Pe1G');
+(4, 'Tanvir Rahman Tonmoy', 'trtonmoy11@gmail.com', '01864625239', 'i dont know', 'none of your business', NULL, '1767282514_495367505_1114526730719562_3796782046368959672_n.jpg', '$2y$10$AisXnWLtFn197/JAIeZIx./HWnMn3Vi0C5LxC6W542kolbV59Pe1G'),
+(5, 'Bran', 'bran@g.com', '1', 'af', 'af', NULL, NULL, '$2y$12$Iz3w/n198Bma8E.tI6Psi.hOfxg3pHZL.y9LViZo34wPdd0ar9mVS');
 
 -- --------------------------------------------------------
 
@@ -148,6 +148,18 @@ CREATE TABLE `dm` (
   `sender_id` int(11) DEFAULT NULL,
   `receiver_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dm`
+--
+
+INSERT INTO `dm` (`message_id`, `sender_id`, `receiver_id`) VALUES
+(1, 9, 10),
+(2, 9, 10),
+(3, 9, 10),
+(4, 9, 10),
+(5, 9, 10),
+(6, 9, 10);
 
 -- --------------------------------------------------------
 
@@ -204,7 +216,6 @@ INSERT INTO `future_letters` (`letter_id`, `user_id`, `letter_text`, `release_da
 
 --
 -- Table structure for table `message_content`
--- FROM 1mental.sql (unique to that version)
 --
 
 CREATE TABLE `message_content` (
@@ -212,6 +223,18 @@ CREATE TABLE `message_content` (
   `content` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message_content`
+--
+
+INSERT INTO `message_content` (`message_id`, `content`, `created_at`) VALUES
+(0, 'hi', '2026-01-06 01:39:09'),
+(2, 'hi', '2026-01-06 01:49:00'),
+(3, 'hi', '2026-01-06 01:49:06'),
+(4, 'hi', '2026-01-06 01:50:01'),
+(5, 'gi', '2026-01-06 01:50:10'),
+(6, 'gi', '2026-01-06 01:50:43');
 
 -- --------------------------------------------------------
 
@@ -223,17 +246,46 @@ CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `sharable_link` varchar(255) DEFAULT NULL,
   `post_from_past` text DEFAULT NULL,
-  `comments` text DEFAULT NULL
+  `flair` varchar(50) DEFAULT NULL,
+  `comments` text DEFAULT NULL,
+  `is_anonymous` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `sharable_link`, `post_from_past`, `comments`) VALUES
-(1, NULL, 'i hate myself', NULL),
-(2, NULL, 'yoa', NULL),
-(3, NULL, 'hi', 'jimmy: hi haff\n');
+INSERT INTO `post` (`post_id`, `sharable_link`, `post_from_past`, `flair`, `comments`, `is_anonymous`, `created_at`) VALUES
+(1, NULL, 'i hate myself', NULL, NULL, 0, '2026-01-05 17:39:35'),
+(2, NULL, 'yoa', NULL, NULL, 0, '2026-01-05 17:39:35'),
+(3, NULL, 'hi', NULL, 'jimmy: hi haff\n', 0, '2026-01-05 17:39:35'),
+(5, NULL, 'Where is my book?', 'Resource', NULL, 1, '2026-01-05 18:16:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_flairs`
+--
+
+CREATE TABLE `post_flairs` (
+  `flair_id` int(11) NOT NULL,
+  `flair_name` varchar(50) NOT NULL,
+  `flair_description` varchar(255) DEFAULT NULL,
+  `flair_color` varchar(7) DEFAULT '#6c757d'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `post_flairs`
+--
+
+INSERT INTO `post_flairs` (`flair_id`, `flair_name`, `flair_description`, `flair_color`) VALUES
+(1, 'Question', 'Ask for advice or support', '#0066cc'),
+(2, 'Achievement', 'Share your success and wins', '#28a745'),
+(3, 'Struggle', 'Talk about challenges', '#dc3545'),
+(4, 'Gratitude', 'Express thankfulness', '#fd7e14'),
+(5, 'Resource', 'Share helpful resources', '#6f42c1'),
+(6, 'Updates', 'Life updates and news', '#17a2b8');
 
 -- --------------------------------------------------------
 
@@ -306,26 +358,13 @@ INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `role`, `point
 (9, 'hafff', 'haff@ggma.com', '$2y$12$nRfZZczVKjb7y1182cFWSerATcmk2yb2DKNrY5NZJeYOuuYJr8uLO', 'user', 0, NULL, NULL, NULL),
 (10, 'jimmy', 'goodma@gm.col', '$2y$12$1r2J/tOJUOHUgGgJV8JvQu54PKfFl6vBK/5Wfo14o3QeytMTLUXIW', 'user', 0, NULL, NULL, NULL),
 (11, 'who cares', 'asgasga', 'asdfasdfasfda', 'counsilor', 0, NULL, NULL, NULL),
-(12, 'ror', 'haff22@ggma.com', '$2y$12$MdADpjPOoxI8UNUc2sHaLukIkW4sRTPE6qCeNOu44rKNWQm5DKDku', 'user', 0, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_group`
---
-
-CREATE TABLE `user_group` (
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `members` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(12, 'ror', 'haff22@ggma.com', '$2y$12$MdADpjPOoxI8UNUc2sHaLukIkW4sRTPE6qCeNOu44rKNWQm5DKDku', 'user', 0, NULL, NULL, NULL),
+(13, 'jon', 'jon@gg.com', '$2y$12$HDWXfo0ENbv1mlGL5bHko.6Nae9szwkRNCxRkBvyzIVL6Vd/31hGS', 'admin', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users_in_group`
--- FROM 1mental.sql (unique to that version)
 --
 
 CREATE TABLE `users_in_group` (
@@ -339,6 +378,19 @@ CREATE TABLE `users_in_group` (
 
 INSERT INTO `users_in_group` (`user_id`, `group_id`) VALUES
 (9, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_group`
+--
+
+CREATE TABLE `user_group` (
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `members` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -439,6 +491,13 @@ ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`);
 
 --
+-- Indexes for table `post_flairs`
+--
+ALTER TABLE `post_flairs`
+  ADD PRIMARY KEY (`flair_id`),
+  ADD UNIQUE KEY `flair_name` (`flair_name`);
+
+--
 -- Indexes for table `sends`
 --
 ALTER TABLE `sends`
@@ -471,18 +530,18 @@ ALTER TABLE `users`
   ADD KEY `users_ibfk_1` (`feedback_id`);
 
 --
--- Indexes for table `user_group`
---
-ALTER TABLE `user_group`
-  ADD PRIMARY KEY (`group_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `users_in_group`
 --
 ALTER TABLE `users_in_group`
   ADD PRIMARY KEY (`user_id`,`group_id`),
   ADD KEY `fk_post_group` (`group_id`);
+
+--
+-- Indexes for table `user_group`
+--
+ALTER TABLE `user_group`
+  ADD PRIMARY KEY (`group_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `will_receive`
@@ -505,13 +564,19 @@ ALTER TABLE `appointments`
 -- AUTO_INCREMENT for table `counselor`
 --
 ALTER TABLE `counselor`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `counselor_availability`
 --
 ALTER TABLE `counselor_availability`
   MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `dm`
+--
+ALTER TABLE `dm`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `future_letters`
@@ -523,7 +588,13 @@ ALTER TABLE `future_letters`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `post_flairs`
+--
+ALTER TABLE `post_flairs`
+  MODIFY `flair_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `session_notes`
@@ -535,7 +606,7 @@ ALTER TABLE `session_notes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_group`
@@ -630,33 +701,12 @@ ALTER TABLE `session_notes`
   ADD CONSTRAINT `session_notes_ibfk_2` FOREIGN KEY (`counselor_id`) REFERENCES `counselor` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`feedback_id`) REFERENCES `feedback` (`feedback_id`);
-
---
 -- Constraints for table `user_group`
 --
 ALTER TABLE `user_group`
   ADD CONSTRAINT `user_group_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
---
--- Constraints for table `users_in_group`
---
-ALTER TABLE `users_in_group`
-  ADD CONSTRAINT `fk_post_group` FOREIGN KEY (`group_id`) REFERENCES `user_group` (`group_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `users_in_group_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `users_in_group_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `user_group` (`group_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `will_receive`
---
-ALTER TABLE `will_receive`
-  ADD CONSTRAINT `will_receive_ibfk_1` FOREIGN KEY (`feedback_id`) REFERENCES `feedback` (`feedback_id`),
-  ADD CONSTRAINT `will_receive_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `counselor` (`c_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,4 +1,4 @@
-<?php
+\                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <?php
 session_start();
 
 // Check if user is logged in
@@ -125,6 +125,22 @@ if (isset($_GET['user_id'])) {
     $user_result = $stmt->get_result();
     $user_data = $user_result->fetch_assoc();
     $conversation_with_name = $user_data['name'] ?? 'Unknown';
+    $stmt->close();
+    
+    // Get all messages between the two users
+    $messages_query = "
+        SELECT dm.message_id, dm.sender_id, dm.receiver_id, mc.content, mc.created_at 
+        FROM dm
+        LEFT JOIN message_content mc ON dm.message_id = mc.message_id
+        WHERE (dm.sender_id = ? AND dm.receiver_id = ?) 
+           OR (dm.sender_id = ? AND dm.receiver_id = ?)
+        ORDER BY mc.created_at ASC
+    ";
+    $stmt = $mysqli->prepare($messages_query);
+    $stmt->bind_param("iiii", $user_id, $conversation_with_id, $conversation_with_id, $user_id);
+    $stmt->execute();
+    $messages_result = $stmt->get_result();
+    $messages = $messages_result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 } elseif (isset($_GET['counselor_id'])) {
     $conversation_with_id = intval($_GET['counselor_id']);
@@ -260,6 +276,7 @@ $stmt->close();
                 <div class="messages-container">
                     <?php if (!empty($messages)): ?>
                         <?php foreach ($messages as $msg): ?>
+                            <?php if (!empty($msg['content'])): ?>
                             <div class="message <?php echo ($msg['sender_id'] === $user_id) ? 'sent' : 'received'; ?>">
                                 <div class="message-content">
                                     <?php echo htmlspecialchars($msg['content']); ?>
@@ -268,6 +285,7 @@ $stmt->close();
                                     <?php echo date('H:i', strtotime($msg['created_at'])); ?>
                                 </div>
                             </div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="no-messages">
