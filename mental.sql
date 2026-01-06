@@ -57,6 +57,20 @@ INSERT INTO `appointments` (`appointment_id`, `user_id`, `counselor_id`, `appoin
 
 -- --------------------------------------------------------
 
+CREATE TABLE `daily_mood` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `mood` enum('good','okay','bad') NOT NULL,
+  `checkin_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `daily_mood`
+--
+
+INSERT INTO `daily_mood` (`id`, `user_id`, `mood`, `checkin_date`) VALUES
+(3, 8, '', '2026-01-05');
+
 --
 -- Table structure for table `can_create`
 --
